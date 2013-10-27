@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Say voice="alice">Thanks for trying our documentation. Enjoy!</Say>
+    <Say voice="alice">Record a message of love at the beep.</Say>
+    <Record timeout="30" action="http://lovebomb.herokuapp.com/recording" method="GET"/>
 </Response>
