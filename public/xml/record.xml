@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
     <Say> Please record your message at the beep. </Say>
-    <Record timeout="10" method="GET"/>
+    <Record timeout="10"/>
     <Say>I did not hear a recording.  Goodbye.</Say>
 </Response>
