@@ -4,7 +4,8 @@
  */
 
 var dispatcher = require('../love_dispatcher'),
-    Firebase = require('firebase')
+    Firebase = require('firebase'),
+    params = require('../params')
 
 var dbRef = new Firebase('https://lovebomb.firebaseio.com/lovebombs')
 
@@ -41,7 +42,7 @@ exports.startBomb = function(req, res){
   var id = item.name()
 
   var actionUrl = 'http://lovebomb.herokuapp.com/record.xml?'
-                    + $.param({
+                    + params({
                       id: id,
                       recipientName: req.query.recipientName
                     })
@@ -55,7 +56,7 @@ exports.sendBombToRecipient = function(req, res){
 
 
   var actionUrl = 'http://lovebomb.herokuapp.com/send.xml?'
-                    + $.param({
+                    + params({
                       bomberName: req.query.bomber.name,
                       recordingUrl: req.query.call.recordingUrl
                     })
