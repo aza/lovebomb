@@ -33,7 +33,7 @@ exports.callBomber = function(number){
       from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
       url: 'http://lovebomb.herokuapp.com/xml/record.xml',
       method: "GET",
-      Record: false,
+      Record: true,
       StatusCallback: 'http://lovebomb.herokuapp.com/recording',
       StatusCallbackMethod: 'GET'
   }, function(err, responseData) {
