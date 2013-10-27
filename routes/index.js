@@ -24,5 +24,6 @@ exports.callRecipient = function(req, res){
 
 exports.recording = function(req, res){
   console.log( "RECORDING" )
+  res.send('true')
   //console.log( req )
 }
