@@ -45,7 +45,9 @@
       recipientName:   $('#recipientName').val(),
       recipientNumber: $('#recipientNumber').val()
     }
-    $.get('startBomb', params )
+    $.get('startBomb', params, function(data){
+      console.log(data)
+    })
   })
 
 
