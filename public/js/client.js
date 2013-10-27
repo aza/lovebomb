@@ -20,7 +20,7 @@
     data = snapshot.val()
     console.log( data )
 
-    if( data.call.stauts == "done" ){
+    if( data.call.status == "done" ){
 
     }
   }
@@ -59,7 +59,7 @@
 
     $.get('startBomb', params, function(data){
       var lovebombRef = new Firebase(FIREBASE_BASE_URL + '/lovebombs/' + data.id)
-      lovebombRef.on('child_changed', onLovebombUpdate )
+      lovebombRef.on('value', onLovebombUpdate )
       console.log(data)
     })
   })
