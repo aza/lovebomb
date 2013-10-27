@@ -21,7 +21,13 @@
     console.log( data )
 
     if( data.call && data.call.status == "done" ){
+      $('.starting').hide()
+      $('.telling').show()
 
+      $('audio')
+        .attr({autoplay:'autoplay', controls:'controls'})
+        .append( $('source').attr({src:data.call.recordingUrl}))
+        .appendTo('.telling')
     }
   }
 
@@ -57,15 +63,13 @@
       recipientNumber: $('#recipientNumber').val()
     }
 
-    $('#loggedin').fadeOut()
-    $('#starting').fadeIn()
+    $('.loggedin').hide()
+    $('.starting').show()
 
     $.get('startBomb', params, function(data){
       var lovebombRef = new Firebase(FIREBASE_BASE_URL + '/lovebombs/' + data.id)
       lovebombRef.on('value', onLovebombUpdate )
       console.log(data)
-      $('#starting').fadeOut()
-      $('#telling').fadeIn()
     })
   })
 
