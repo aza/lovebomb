@@ -19,6 +19,10 @@
   function onLovebombUpdate( snapshot ){
     data = snapshot.val()
     console.log( data )
+
+    if( data.call.stauts == "done" ){
+
+    }
   }
 
 
@@ -54,7 +58,7 @@
     }
 
     $.get('startBomb', params, function(data){
-      var lovebombRef = new Firebase(FIREBASE_BASE_URL + /lovebombs/' + data.id)
+      var lovebombRef = new Firebase(FIREBASE_BASE_URL + '/lovebombs/' + data.id)
       lovebombRef.on('child_changed', onLovebombUpdate )
       console.log(data)
     })
