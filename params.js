@@ -1,3 +1,5 @@
+var query = require('querystring');
+
 exports.params = function params(object, prefix)
 {
   var result = '',

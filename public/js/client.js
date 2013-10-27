@@ -29,7 +29,11 @@
         .append( $('<source>').attr({src:data.call.recordingUrl}))
         .appendTo('.telling')
 
-      $.get('sendBombToRecipient', data )
+      $.get('sendBombToRecipient', {
+        bomberName: data.bomber.name
+        recipientNumber: data.recipient.number
+        recordingUrl: data.call.recordingUrl
+      })
     }
   }
 
