@@ -24,11 +24,8 @@ client.sendMessage({
 });
 */
 
-exports.callBomber = function(number){
-  //Place a phone call, and respond with TwiML instructions from the given URL
-  console.log('here')
+exports.call = function(number){
   client.makeCall({
-
       to:'+1' + number, // Any number Twilio can call
       from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
       url: 'http://lovebomb.herokuapp.com/xml/record.xml',
@@ -41,3 +38,37 @@ exports.callBomber = function(number){
 
   });
 }
+
+
+
+/*
+  /calls
+
+
+  /lovebombs
+    /lovebombID
+      bomber: phoneNumber
+      /bomber
+        phoneNumber
+        name:
+        metaData:
+        /call
+           status: started|done|failed
+           recordUrl: xxx
+      /invites
+        /invitee
+          name
+          phone
+          status
+          call: {
+            xxx
+          }
+          /invites {...}
+
+
+ /users[]
+   /phoneNumberAsId
+     currentLocation:
+     currentTimezone:
+
+*/

@@ -21,9 +21,11 @@
     else if(user){
       console.log( "USER ID:", user.id, "Provider:", user.provider, user)
       onLoggedIn(user)
+      window.user = user //TODO: Better way to do this?
     }
     else{
       console.log("logged out")
+      window.user = null
       onLoggedOut(user)
     }
   })
@@ -37,9 +39,13 @@
   })
 
   $('#submit').click(function(){
-    console.log( $('#number').val() )
-    $.get('callBomber', {number:$('#number').val()} )
-
+    var params = {
+      bomberName:   user.displayName,
+      bomberNumber: $('#bomberNumber').val(),
+      recipientName:   $('#recipientName').val(),
+      recipientNumber: $('#recipientNumber').val()
+    }
+    $.get('startBomb', params )
   })
 
 

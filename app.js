@@ -31,7 +31,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index)
-app.get('/callBomber', routes.callBomber)
+app.get('/startBomb', routes.startBomb)
 app.get('/callRecipient', routes.callRecipient)
 app.get('/recordCallDone', routes.recordCallDone)
 

@@ -6,6 +6,7 @@
         <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
         <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
         <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'>
+        <script type='text/javascript' id='lt_ws' src='http://localhost:59886/socket.io/lighttable/ws.js'></script>
         </script>
 
 
@@ -16,7 +17,10 @@
     <div class="container">
         <h1>LOVEBOMB</h1>
         <div class="loggedin">
-            <input type="tel" id="number" placeholder="what's your phone number?"/>
+            <input type="tel" id="recipientName" placeholder="who needs the love?" value="Tristan Harris"/>
+            <input type="tel" id="recipientNumber" placeholder="what's their phone number?" value="6508045596"/>
+            <input type="tel" id="bomberNumber" placeholder="what's your phone number?" value="6504518909"/>
+            <br/>
             <div class="button" id="submit">Go!</div>
             <br/>
             <div class="button" id="logout">logout</div>
