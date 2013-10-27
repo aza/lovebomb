@@ -36,8 +36,8 @@ exports.callBomber = function(number){
   }, function(err, responseData) {
 
       //executed when the call has been initiated.
-      console.log(err, responseData); // outputs "+14506667788"
-      console.log( responseData.body )
+      console.log(err ); // outputs "+14506667788"
+      console.log( responseData.subresource_uris )
 
   });
 }
