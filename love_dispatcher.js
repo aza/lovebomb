@@ -26,17 +26,17 @@ client.sendMessage({
 
 exports.callBomber = function(number){
   //Place a phone call, and respond with TwiML instructions from the given URL
+  console.log('here')
   client.makeCall({
 
       to:'+1' + number, // Any number Twilio can call
-      from: '+16503535591' // A number you bought from Twilio and can use for outbound communication
-      //Record: true,
-      //StatusCallback: 'http://google.com'
+      from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
+      url: 'http://www.example.com/twiml.php'
 
   }, function(err, responseData) {
 
       //executed when the call has been initiated.
-      console.log(responseData); // outputs "+14506667788"
+      console.log(err, responseData); // outputs "+14506667788"
 
   });
 }
