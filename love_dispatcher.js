@@ -25,6 +25,7 @@ client.sendMessage({
 */
 
 exports.call = function(number, id, name){
+  console.log( "MAKING CALL")
   client.makeCall({
       to:'+1' + number, // Any number Twilio can call
       from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
@@ -33,7 +34,7 @@ exports.call = function(number, id, name){
   }, function(err, responseData) {
 
       //executed when the call has been initiated.
-      //console.log(err ); // outputs "+14506667788"
+      console.log("ERROR", err ); // outputs "+14506667788"
       //console.log( responseData.subresource_uris )
 
   });
