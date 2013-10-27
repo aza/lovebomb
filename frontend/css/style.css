@@ -23,12 +23,22 @@ body{
 
 
 .container{
-  width: 800px;
+  width: 650px;
   margin: auto;
 }
 
 h2{
   font-size:30px;}
+
+
+.loggedin input{
+  border: none;
+  font-size: 30px;
+  padding: 10px;
+  width: 500px
+}
+
+#logout{ margin-top: 100px;}
 
 /* BUTTONS */
 

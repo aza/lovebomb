@@ -14,10 +14,19 @@
 
     <div class="container">
         <h1>LOVEBOMB</h1>
-        <h2></h2>
-        <div id="rocket"></div><br/>
-        <div class="button" id="login">login</div>
-        <div class="button" id="logout">logout</div>
+        <div class="loggedin">
+            <input type="tel" id="number" placeholder="what's your phone number?"/>
+            <div class="button" id="submit">Go!</div>
+            <br/>
+            <div class="button" id="logout">logout</div>
+        </div>
+
+        <div class="loggedout">
+            <div id="rocket"></div><br/>
+            <div class="button" id="login">login</div>
+        </div>
+
+
     </div>
 
     <script src="js/app.js"></script>
