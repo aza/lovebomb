@@ -20,3 +20,8 @@ exports.callRecipient = function(req, res){
   /* Perform call */
   res.send('ID OF PHONE CALL')
 }
+
+
+exports.recording = function(req, res){
+  console.log( req )
+}
