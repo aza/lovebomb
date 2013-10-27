@@ -60,7 +60,7 @@ exports.sendBombToRecipient = function(req, res){
                       bomberName: req.query.bomberName,
                       recordingUrl: req.query.recordingUrl
                     })
-  dispatcher.call( req.query.recipient.number, actionUrl )
+  dispatcher.call( req.query.recipientNumber, actionUrl )
   res.send(req.query)
 }
 
