@@ -2,13 +2,16 @@
 
   function onLoggedIn(user){
     $('h1').text('Hello, ' + user.first_name)
-    $('h2').text('from ' + user.hometown.name)
+    $('.loggedin').show()
+    $('.loggedout').hide()
   }
 
 
   function onLoggedOut(user){
     $('h1').text('LOVEBOMB')
-    $('h2').empty()
+    $('.loggedin').hide()
+    $('.loggedout').show()
+
   }
 
 
@@ -31,6 +34,10 @@
 
   $('#logout').click(function(){
     auth.logout()
+  })
+
+  $('#submit').click(function(){
+    console.log( $('#number').val() )
   })
 
 
