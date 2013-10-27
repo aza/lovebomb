@@ -36,9 +36,10 @@ exports.startBomb = function(req, res){
 
 
 
-  dbRef.push( dbData )
+  var item = dbRef.push( dbData )
+  var id = item.name()
 
-  dispatcher.call( req.query.bomberNumber )
+  dispatcher.call( req.query.bomberNumber, id )
   res.send('ID OF PHONE CALL')
 }
 
@@ -56,4 +57,8 @@ exports.recordCallDone = function(req, res){
   // The client can listen for an event.
   res.send('true')
   //console.log( req )
+}
+
+exports.xml = function(req,res){
+  res.render('record', {id: req.query.id})
 }
