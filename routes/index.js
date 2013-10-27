@@ -22,9 +22,10 @@ exports.callRecipient = function(req, res){
 }
 
 
-exports.recording = function(req, res){
+exports.recordCallDone = function(req, res){
   console.log( "RECORDING" )
   console.log( req.query )
+  // req.query.RecordingUrl
   res.send('true')
   //console.log( req )
 }
