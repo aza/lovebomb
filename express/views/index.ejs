@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+    <head>
+        <title>Lovebomb</title>
+        <link rel="stylesheet" href='/stylesheets/style.css'/>
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+        <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'>
+        </script>
+
+
+    </head>
+
+    <body>
+
+    <div class="container">
+        <h1>LOVEBOMB</h1>
+        <div class="loggedin">
+            <input type="tel" id="number" placeholder="what's your phone number?"/>
+            <div class="button" id="submit">Go!</div>
+            <br/>
+            <div class="button" id="logout">logout</div>
+        </div>
+
+        <div class="loggedout">
+            <div id="rocket"></div><br/>
+            <div class="button" id="login">login</div>
+        </div>
+
+
+    </div>
+
+    <script src="/js/client.js"></script>
+    </body>
+
 </html>
