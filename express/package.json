@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "lovebomb",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,5 +10,9 @@
     "ejs": "*",
     "stylus": "*",
     "twilio": "*"
+  },
+  "engines":{
+    "node": "*",
+    "npm": "*"
   }
 }

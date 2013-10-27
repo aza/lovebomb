@@ -5,13 +5,16 @@ html {
       rgba(0,0,0,0),
       rgba(0,0,0,0.4)
      ),
-     url(http://i.imgur.com/njv3NXm.jpg) no-repeat center center fixed;
+     url(http://farm9.staticflickr.com/8374/8541097389_27e79a6e9e_h.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 
 }
+
+/* http://farm9.staticflickr.com/8374/8541097389_27e79a6e9e_h.jpg */
+/* http://i.imgur.com/njv3NXm.jpg */
 
 
 body{

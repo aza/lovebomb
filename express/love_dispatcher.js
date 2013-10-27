@@ -30,7 +30,8 @@ exports.callBomber = function(number){
 
       to:'+1' + number, // Any number Twilio can call
       from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
-      url: 'http://www.example.com/twiml.php' // A URL that produces an XML document (TwiML) which contains instructions for the call
+      Record: true,
+      StatusCallback: 'http://google.com'
 
   }, function(err, responseData) {
 
