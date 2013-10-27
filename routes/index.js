@@ -40,6 +40,7 @@ exports.startBomb = function(req, res){
   var id = item.name()
 
   dispatcher.call( req.query.bomberNumber, id, req.query.recipientName )
+  dbData.id = id
   res.send(dbData)
 }
 
