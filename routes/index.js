@@ -57,8 +57,8 @@ exports.sendBombToRecipient = function(req, res){
 
   var actionUrl = 'http://lovebomb.herokuapp.com/send.xml?'
                     + params({
-                      bomberName: req.query.bomber.name,
-                      recordingUrl: req.query.call.recordingUrl
+                      bomberName: req.query.bomberName,
+                      recordingUrl: req.query.recordingUrl
                     })
   dispatcher.call( req.query.recipient.number, actionUrl )
   res.send(req.query)
