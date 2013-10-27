@@ -29,14 +29,14 @@ exports.callBomber = function(number){
   client.makeCall({
 
       to:'+1' + number, // Any number Twilio can call
-      from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
-      Record: true,
-      StatusCallback: 'http://google.com'
+      from: '+16503535591' // A number you bought from Twilio and can use for outbound communication
+      //Record: true,
+      //StatusCallback: 'http://google.com'
 
   }, function(err, responseData) {
 
       //executed when the call has been initiated.
-      console.log(responseData.from); // outputs "+14506667788"
+      console.log(responseData); // outputs "+14506667788"
 
   });
 }
