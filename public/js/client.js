@@ -1,4 +1,6 @@
 (function(){
+  var FIREBASE_BASE_URL = 'https://lovebomb.firebaseio.com/'
+
 
   function onLoggedIn(user){
     $('h1').text('Hello, ' + user.first_name)
@@ -14,8 +16,13 @@
 
   }
 
+  function onLovebombUpdate( snapshot ){
+    data = snapshot.val()
+    console.log( data )
+  }
 
-  var lbRef = new Firebase('https://lovebomb.firebaseio.com/')
+
+  var lbRef = new Firebase(FIREBASE_BASE_URL)
   var auth = new FirebaseSimpleLogin( lbRef, function(error, user){
     if( error ) {console.log("ERROR LOGIN", error)}
     else if(user){
@@ -45,7 +52,10 @@
       recipientName:   $('#recipientName').val(),
       recipientNumber: $('#recipientNumber').val()
     }
+
     $.get('startBomb', params, function(data){
+      var lovebombRef = new Firebase(FIREBASE_BASE_URL + /lovebombs/' + data.id)
+      lovebombRef.on('child_changed', onLovebombUpdate )
       console.log(data)
     })
   })
