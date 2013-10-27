@@ -23,5 +23,6 @@ exports.callRecipient = function(req, res){
 
 
 exports.recording = function(req, res){
+  console.log( "RECORDING" )
   console.log( req )
 }
