@@ -30,8 +30,8 @@
         .appendTo('.telling')
 
       $.get('sendBombToRecipient', {
-        bomberName: data.bomber.name
-        recipientNumber: data.recipient.number
+        bomberName: data.bomber.name,
+        recipientNumber: data.recipient.number,
         recordingUrl: data.call.recordingUrl
       })
     }
