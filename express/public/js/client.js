@@ -38,7 +38,10 @@
 
   $('#submit').click(function(){
     console.log( $('#number').val() )
+    $.get('callBomber', {number:$('#number').val()} )
+
   })
+
 
 
 })()

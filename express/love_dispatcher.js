@@ -1,6 +1,7 @@
 //require the Twilio module and create a REST client
 var client = require('twilio')('AC15cd7e1236a030d64726592c2abf5e62', '517ce6bcbc8b170211e0e52d7c5b132d');
 
+/*
 //Send an SMS text message
 client.sendMessage({
 
@@ -21,17 +22,20 @@ client.sendMessage({
 
     }
 });
+*/
 
-//Place a phone call, and respond with TwiML instructions from the given URL
-client.makeCall({
+exports.callBomber = function(number){
+  //Place a phone call, and respond with TwiML instructions from the given URL
+  client.makeCall({
 
-    to:'+16508045596', // Any number Twilio can call
-    from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
-    url: 'http://www.example.com/twiml.php' // A URL that produces an XML document (TwiML) which contains instructions for the call
+      to:'+1' + number, // Any number Twilio can call
+      from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
+      url: 'http://www.example.com/twiml.php' // A URL that produces an XML document (TwiML) which contains instructions for the call
 
-}, function(err, responseData) {
+  }, function(err, responseData) {
 
-    //executed when the call has been initiated.
-    console.log(responseData.from); // outputs "+14506667788"
+      //executed when the call has been initiated.
+      console.log(responseData.from); // outputs "+14506667788"
 
-});
+  });
+}
