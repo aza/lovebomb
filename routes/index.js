@@ -52,9 +52,14 @@ exports.callRecipient = function(req, res){
 exports.recordCallDone = function(req, res){
   console.log( "RECORDING" )
   console.log( req.query )
-  // req.query.RecordingUrl
-  // Store the ID, the recorindg URL, and anything else in a Firebase of calls.
-  // The client can listen for an event.
+
+  var bombRef = dbRef.child( req.query.id )
+
+  bombRef.child('call').set({
+    status: 'done',
+    recordingUrl: req.query.RecordingUrl
+  })
+
   res.send('true')
   //console.log( req )
 }
