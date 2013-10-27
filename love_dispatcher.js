@@ -24,12 +24,12 @@ client.sendMessage({
 });
 */
 
-exports.call = function(number, id, name){
+exports.call = function(number, actionUrl){
   console.log( "MAKING CALL")
   client.makeCall({
       to:'+1' + number, // Any number Twilio can call
       from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
-      url: 'http://lovebomb.herokuapp.com/record.xml?id='+id+'&recipientName='+encodeURIComponent(name),
+      url: actionUrl,
       method: "GET"
   }, function(err, responseData) {
 

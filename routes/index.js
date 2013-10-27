@@ -22,10 +22,11 @@ exports.startBomb = function(req, res){
     bomber: {
       number: req.query.bomberNumber,
       name: req.query.bomberName,
-      call: {
-        status: 'in-progress',
-        recordingUrl: null
-      }
+    },
+
+    call: {
+      status: 'in-progress',
+      recordingUrl: null
     },
 
     recipient: {
@@ -39,14 +40,27 @@ exports.startBomb = function(req, res){
   var item = dbRef.push( dbData )
   var id = item.name()
 
-  dispatcher.call( req.query.bomberNumber, id, req.query.recipientName )
+  var actionUrl = 'http://lovebomb.herokuapp.com/record.xml?'
+                    + $.param({
+                      id: id,
+                      recipientName: req.query.recipientName
+                    })
+  dispatcher.call( req.query.bomberNumber, actionUrl )
   dbData.id = id
   res.send(dbData)
 }
 
-exports.callRecipient = function(req, res){
+exports.sendBombToRecipient = function(req, res){
   /* Perform call */
-  res.send('ID OF PHONE CALL')
+
+
+  var actionUrl = 'http://lovebomb.herokuapp.com/send.xml?'
+                    + $.param({
+                      bomberName: req.query.bomber.name,
+                      recordingUrl: req.query.call.recordingUrl
+                    })
+  dispatcher.call( req.query.recipient.number, actionUrl )
+  res.send(req.query)
 }
 
 
@@ -65,6 +79,14 @@ exports.recordCallDone = function(req, res){
   //console.log( req )
 }
 
-exports.xml = function(req,res){
+exports.recordXml = function(req,res){
   res.render('record', {id: req.query.id, recipientName:req.query.recipientName })
+}
+
+exports.sendXml = function(req,res){
+  res.render('send', {
+    id: req.query.id,
+    bomberName: req.query.bomberName,
+    recordingUrl: req.query.recordingUrl
+  })
 }

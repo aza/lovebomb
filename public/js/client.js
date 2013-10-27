@@ -24,10 +24,12 @@
       $('.starting').hide()
       $('.telling').show()
 
-      $('audio')
+      $('<audio>')
         .attr({autoplay:'autoplay', controls:'controls'})
-        .append( $('source').attr({src:data.call.recordingUrl}))
+        .append( $('<source>').attr({src:data.call.recordingUrl}))
         .appendTo('.telling')
+
+      $.get('sendBombToRecipient', data )
     }
   }
 
