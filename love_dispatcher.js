@@ -33,8 +33,8 @@ exports.call = function(number, id, name){
   }, function(err, responseData) {
 
       //executed when the call has been initiated.
-      console.log(err ); // outputs "+14506667788"
-      console.log( responseData.subresource_uris )
+      //console.log(err ); // outputs "+14506667788"
+      //console.log( responseData.subresource_uris )
 
   });
 }
