@@ -78,9 +78,10 @@ exports.recordCallDone = function(req, res){
 }
 
 exports.recordXml = function(req,res){
-  res.render('record', {data: JSON.parse(req.query.data)})
+  console.log( req.query )
+  res.render('record', JSON.parse(req.query.data))
 }
 
 exports.sendXml = function(req,res){
-  res.render('send', {data: JSON.parse(req.query.data)})
+  res.render('send', JSON.parse(req.query.data))
 }
