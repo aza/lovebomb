@@ -62,7 +62,7 @@ exports.sendBombToRecipient = function(req, res){
 
 
 exports.recordCallDone = function(req, res){
-  console.log( "RECORDING", req.query.data )
+  console.log( "RECORDING", req.query )
   var data = JSON.parse( req.query.data )
 
   console.log( data )
@@ -71,7 +71,7 @@ exports.recordCallDone = function(req, res){
 
   bombRef.child('call').set({
     status: 'done',
-    recordingUrl: data.call.recordingUrl
+    recordingUrl: data.query.recordingUrl
   })
 
   res.send('true')
