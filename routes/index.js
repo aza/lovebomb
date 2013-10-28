@@ -37,14 +37,12 @@ exports.startBomb = function(req, res){
     }
   }
 
-  console.log('wup')
   var item = dbRef.push( dbData )
   var id = item.name()
-  dbData.id = id
 
   dispatcher.call(
     dbData.bomber.number,
-    'http://lovebomb.herokuapp.com/record.xml?data=' + encodeURI(JSON.stringify(dbData))
+    'http://lovebomb.herokuapp.com/record.xml?id='+id
   )
 
   res.send(dbData)
@@ -53,9 +51,11 @@ exports.startBomb = function(req, res){
 exports.sendBombToRecipient = function(req, res){
   /* Perform call */
 
+  console.log( "SEND BOMB DATA", req.query)
+
   dispatcher.call(
     req.query.recipientNumber,
-    'http://lovebomb.herokuapp.com/send.xml?data=' + encodeURI(JSON.stringify(req.query.data))
+    'http://lovebomb.herokuapp.com/send.xml?id'+req.query.id
   )
   res.send(req.query)
 }
@@ -79,11 +79,17 @@ exports.recordCallDone = function(req, res){
 }
 
 exports.recordXml = function(req,res){
-  console.log( req.query )
-  res.render('record', {data:JSON.parse(req.query.data)})
+  dbRef.child(req.query.id).once('value', function(snapshot){
+    var data = snapshot.val()
+    data.id = req.query.id
+    res.render('record', data)
+  })
 }
 
 exports.sendXml = function(req,res){
-  console.log( "THING", req.query)
-  res.render('send', {data:JSON.parse(req.query.data)})
+  dbRef.child(req.query.id).once('value', function(snapshot){
+    var data = snapshot.val()
+    data.id = req.query.id
+    res.render('send', data)
+  })
 }
