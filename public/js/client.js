@@ -63,16 +63,20 @@
 
   $('#submit').click(function(){
     var params = {
-      bomberName:   user.displayName,
-      bomberNumber: $('#bomberNumber').val(),
-      recipientName:   $('#recipientName').val(),
-      recipientNumber: $('#recipientNumber').val()
+      bomber:{
+        name: user.displayName,
+        number: $('#bomberNumber').val()
+      },
+      recipient: {
+        name: $('#recipientName').val(),
+        number: $('#recipientNumber').val()
+      }
     }
 
     $('.loggedin').hide()
     $('.starting').show()
 
-    $.get('startBomb', params, function(data){
+    $.get('startBomb', {data: JSON.stringify(params)}, function(data){
       var lovebombRef = new Firebase(FIREBASE_BASE_URL + '/lovebombs/' + data.id)
       lovebombRef.on('value', onLovebombUpdate )
       console.log(data)

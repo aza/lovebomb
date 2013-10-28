@@ -28,7 +28,7 @@ exports.params = function params(object, prefix)
     // objectects and arrays pass depper
     if (typeof(object[i]) == 'object' || typeof(object[i]) == 'array')
     {
-      result += toURL(object[i], key) + postfix;
+      result += exports.params(object[i], key) + postfix;
       continue;
     }
 

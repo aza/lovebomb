@@ -17,49 +17,47 @@ exports.startBomb = function(req, res){
   /* Perform call */
   // TODO: Add proper error handling for query
   // TODO: Put the call into the Firebase in /calls
-  console.log( req.query )
+  console.log( req.query, req.query.data )
+
+  var data = JSON.parse( req.query.data )
+  console.log( data )
 
   var dbData = {
     bomber: {
-      number: req.query.bomberNumber,
-      name: req.query.bomberName,
-    },
-
-    call: {
-      status: 'in-progress',
-      recordingUrl: null
+      number: data.bomber.number,
+      name:   data.bomber.name,
+      call: {
+        status: 'in-progress',
+        recordingUrl: null
+      },
     },
 
     recipient: {
-      number: req.query.recipientNumber,
-      name: req.query.recipientName
+      number: data.recipient.number,
+      name:   data.recipient.name
     }
   }
 
-
-
+  console.log('wup')
   var item = dbRef.push( dbData )
   var id = item.name()
-
-  var actionUrl = 'http://lovebomb.herokuapp.com/record.xml?'
-                    + params({
-                      id: id,
-                      recipientName: req.query.recipientName
-                    })
-  dispatcher.call( req.query.bomberNumber, actionUrl )
   dbData.id = id
+
+  dispatcher.call(
+    dbData.bomber.number,
+    'http://lovebomb.herokuapp.com/record.xml' + params({data:dbData})
+  )
+
   res.send(dbData)
 }
 
 exports.sendBombToRecipient = function(req, res){
   /* Perform call */
 
-  var actionUrl = 'http://lovebomb.herokuapp.com/send.xml?'
-                    + params({
-                      bomberName: req.query.bomberName,
-                      recordingUrl: req.query.recordingUrl
-                    })
-  dispatcher.call( req.query.recipientNumber, actionUrl )
+  dispatcher.call(
+    req.query.recipientNumber,
+    'http://lovebomb.herokuapp.com/send.xml?' + params({data:req.query.data})
+  )
   res.send(req.query)
 }
 
@@ -80,13 +78,9 @@ exports.recordCallDone = function(req, res){
 }
 
 exports.recordXml = function(req,res){
-  res.render('record', {id: req.query.id, recipientName:req.query.recipientName })
+  res.render('record', {data: JSON.parse(req.query.data)})
 }
 
 exports.sendXml = function(req,res){
-  res.render('send', {
-    id: req.query.id,
-    bomberName: req.query.bomberName,
-    recordingUrl: req.query.recordingUrl
-  })
+  res.render('send', {data: JSON.parse(req.query.data)})
 }
