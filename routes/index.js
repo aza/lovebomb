@@ -63,7 +63,7 @@ exports.sendBombToRecipient = function(req, res){
 
 exports.recordCallDone = function(req, res){
   console.log( "RECORDING", req.query )
-  var bombRef = dbRef.child( id )
+  var bombRef = dbRef.child( req.query.id )
 
   bombRef.child('call').set({
     status: 'done',
