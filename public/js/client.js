@@ -18,7 +18,8 @@
 
   function onLovebombUpdate( snapshot ){
     data = snapshot.val()
-    console.log( data )
+
+    console.log( "DATA", data )
 
     if( data.call && data.call.status == "done" ){
       $('.starting').hide()
@@ -30,6 +31,7 @@
         .appendTo('.telling')
 
       $.get('sendBombToRecipient', {
+        id: snapshot.name(),
         bomberName: data.bomber.name,
         recipientNumber: data.recipient.number,
         recordingUrl: data.call.recordingUrl
@@ -77,7 +79,9 @@
     $('.starting').show()
 
     $.get('startBomb', {data: JSON.stringify(params)}, function(data){
-      var lovebombRef = new Firebase(FIREBASE_BASE_URL + '/lovebombs/' + data.id)
+      console.log( data )
+      console.log( 'lovebombRefUrl', FIREBASE_BASE_URL + 'lovebombs/' + data )
+      var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + data)
       lovebombRef.on('value', onLovebombUpdate )
       console.log(data)
     })

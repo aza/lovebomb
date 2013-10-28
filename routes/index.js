@@ -45,7 +45,7 @@ exports.startBomb = function(req, res){
     'http://lovebomb.herokuapp.com/record.xml?id='+id
   )
 
-  res.send(dbData)
+  res.send(id)
 }
 
 exports.sendBombToRecipient = function(req, res){
@@ -55,7 +55,7 @@ exports.sendBombToRecipient = function(req, res){
 
   dispatcher.call(
     req.query.recipientNumber,
-    'http://lovebomb.herokuapp.com/send.xml?id'+req.query.id
+    'http://lovebomb.herokuapp.com/send.xml?id='+req.query.id
   )
   res.send(req.query)
 }
