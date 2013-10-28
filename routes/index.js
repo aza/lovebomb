@@ -5,7 +5,6 @@
 
 var dispatcher = require('../love_dispatcher'),
     Firebase = require('firebase'),
-    params = require('../params').params
 
 var dbRef = new Firebase('https://lovebomb.firebaseio.com/lovebombs')
 
