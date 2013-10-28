@@ -26,6 +26,7 @@ client.sendMessage({
 
 exports.call = function(number, actionUrl){
   console.log( "MAKING CALL")
+  console.log( actionUrl ); return
   client.makeCall({
       to:'+1' + number, // Any number Twilio can call
       from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
