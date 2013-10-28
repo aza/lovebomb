@@ -37,7 +37,7 @@ exports.startBomb = function(req, res){
     }
   }
 
-  var item = dbRef.push( dbData )
+  var item = dbRef..push( dbData )
   var id = item.name()
 
   dispatcher.call(
@@ -63,11 +63,7 @@ exports.sendBombToRecipient = function(req, res){
 
 exports.recordCallDone = function(req, res){
   console.log( "RECORDING", req.query )
-  var data = JSON.parse( req.query.data )
-
-  console.log( data )
-
-  var bombRef = dbRef.child( data.id )
+  var bombRef = dbRef.child( id )
 
   bombRef.child('call').set({
     status: 'done',
@@ -75,7 +71,6 @@ exports.recordCallDone = function(req, res){
   })
 
   res.send('true')
-  //console.log( req )
 }
 
 exports.recordXml = function(req,res){
