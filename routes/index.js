@@ -45,7 +45,7 @@ exports.startBomb = function(req, res){
 
   dispatcher.call(
     dbData.bomber.number,
-    'http://lovebomb.herokuapp.com/record.xml' + params({data:dbData})
+    'http://lovebomb.herokuapp.com/record.xml?' + params({data:dbData})
   )
 
   res.send(dbData)
