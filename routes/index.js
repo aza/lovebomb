@@ -37,7 +37,7 @@ exports.startBomb = function(req, res){
     }
   }
 
-  var item = dbRef..push( dbData )
+  var item = dbRef.push( dbData )
   var id = item.name()
 
   dispatcher.call(
