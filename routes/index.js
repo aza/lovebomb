@@ -55,7 +55,7 @@ exports.sendBombToRecipient = function(req, res){
 
   dispatcher.call(
     req.query.recipientNumber,
-    'http://lovebomb.herokuapp.com/send.xml?' + encodeURI(JSON.stringify(req.query.data))
+    'http://lovebomb.herokuapp.com/send.xml?data=' + encodeURI(JSON.stringify(req.query.data))
   )
   res.send(req.query)
 }
@@ -84,5 +84,6 @@ exports.recordXml = function(req,res){
 }
 
 exports.sendXml = function(req,res){
+  console.log( "THING", req.query)
   res.render('send', {data:JSON.parse(req.query.data)})
 }
