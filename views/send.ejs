@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Say voice="woman" language="en-gb"><%= bomber.name %> has made you a Love Bomb. This is why you are loved.</Say>
+    <Say voice="woman" language="en-gb"><%= bomber.name %></Say>
+    <% for(var i=0; i<friends.length;i++) {%>
+      <Say voice="woman" language="en-gb">and <%= friends[i].name %></Say>
+    <% } %>
+
+    <Say voice="woman" language="en-gb">Have made you a love bomb. This is why you are loved.</Say>
     <Play><%= bomber.call.recordingUrl %></Play>
+    <% for(var i=0; i<friends.length;i++) {%>
+      <Play><%= friends[0].call.recordingUrl %></Play>
+    <% } %>
+
     <Say voice="woman" language="en-gb">And once again, because you shouldn't hear it just once.</Say>
     <Play><%= bomber.call.recordingUrl %></Play>
+    <% for(var i=0; i<friends.length;i++) {%>
+      <Play><%= friends[0].call.recordingUrl %></Play>
+    <% } %>
     <Say voice="woman" language="en-gb">Now go love bomb someone you care about!</Say>
 </Response>

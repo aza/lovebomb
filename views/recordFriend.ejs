@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Say voice="women" language="en-gb">Your friend <%= bomber.name %> is making a love bomb for <%= recipient.name %> and needs your help.</Say>
+    <Say voice="woman" language="en-gb">Your friend <%= bomber.name %> is making a love bomb for <%= recipient.name %> and needs your help.</Say>
+    <Say voice="woman" language="en-gb">They said</Say>
+    <Play><%= bomber.call.recordingUrl %></Play>
     <Say voice="woman" language="en-gb">So, what's something you love about <%= recipient.name %>?</Say>
     <Record timeout="30" action="http://lovebomb.herokuapp.com/recordCallDone?id=<%= id %><% if(typeof path !='undefined') {%>&amp;path=<%= path %><% }%>" method="GET"/>
 </Response>
