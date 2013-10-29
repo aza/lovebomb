@@ -94,7 +94,7 @@
     $('.starting').show()
 
     $.get('startBomb', {data: JSON.stringify(params)}, function(id){
-      console.log('hi')
+      $('#link a').text('Link To This Lovebomb').attr({'href':'/link?q='+id})
       var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + id)
       lovebombRef.child('bomber').on('value', function(snapshot){
         onBomberUpdate(snapshot, id)

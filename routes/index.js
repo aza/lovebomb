@@ -87,3 +87,12 @@ exports.genericXmlRenderer = function(req,res){
     res.render(pageName, data)
   })
 }
+
+exports.link = function(req, res){
+  fetchLovebombById( req.query.q, function(data){
+    console.log( data )
+    data.id = req.query.q
+    res.render('link', data )
+  })
+
+}

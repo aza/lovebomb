@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lovebomb</title>
+        <link rel="stylesheet" href='/stylesheets/style.css'/>
+        <style>
+        input {
+            font-size: 24px;
+            padding: 10px;
+        }
+
+
+        </style>
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+    </head>
+
+    <body>
+
+    <div class="container">
+
+        <h1>
+            <span id="recipient"></span> is getting a Lovebomb from <span id="bomber"></span> <span id="friends"></span>
+        </h1>
+
+        <div class="telling"></div>
+
+    </div>
+
+    <script>
+
+    var FIREBASE_BASE_URL = 'https://lovebomb.firebaseio.com/lovebombs',
+        id = "<%= id %>",
+        dbRef = new Firebase(FIREBASE_BASE_URL).child(id)
+
+    dbRef.once('value', function(snapshot){ render(snapshot.val()) })
+
+    function render(lovebomb){
+        window.lb = lovebomb
+        console.log( lovebomb )
+        $('#recipient').text( lovebomb.recipient.name )
+        $('#bomber').text( lovebomb.bomber.name )
+        var friendList = lovebomb.friends.map(function(f){return "and " + f.name})
+        $('#friends').text( friendList )
+
+        $('<audio>')
+            .attr({controls:'controls'})
+            .append( $('<source>').attr({src:lovebomb.bomber.call.recordingUrl}))
+            .appendTo('.telling')
+
+        lovebomb.friends.forEach(function(friend){
+            if( friend.call && friend.call.recordingUrl ){
+                $('<audio>')
+                    .attr({controls:'controls'})
+                    .append( $('<source>').attr({src:friend.call.recordingUrl}))
+                    .appendTo('.telling')
+            }
+        })
+    }
+
+    </script>
+
+    </body>
+
+
+</html>
