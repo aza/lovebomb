@@ -16,13 +16,13 @@
   }
 
 
-  function onFriendsUpdate(snapshot){
+  function onFriendsUpdate(snapshot, id){
     var data = snapshot.val()
     console.log( "FRIENDS", data )
 
     if( data[0].call && data[0].call.status == "completed" ){
       console.log( "ALL DONE WITH FRIENDS" )
-      $.get('sendBombToRecipient', {id: snapshot.name()})
+      $.get('sendBombToRecipient', {id: id})
     }
   }
 
@@ -45,7 +45,9 @@
       $.get('callFriend', {id: id, friendNum:0})
 
       var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + id)
-      lovebombRef.child('friends').on('value', onFriendsUpdate)
+      lovebombRef.child('friends').on('value', function(snapshot){
+        onFriendsUpdate(snapshot, id)
+      })
     }
   }
 

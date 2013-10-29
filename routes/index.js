@@ -44,14 +44,12 @@ exports.callFriend = function(req, res){
   fetchLovebombById( req.query.id, function(data){
     var friendNum = req.query.friendNum
     console.log( "FRIEND", friendNum, data.friends[friendNum] )
-    var friendRef = dbRef.child(req.query.id).child('friends').child(friendNum)
-    friendRef.update({
-      call:{
-        recordingUrl: 'nothing',
-        status: 'completed'
-      }
-    })
-    res.send(data)
+    dispatcher.call(
+      data.friends[friendNum].number,
+      'http://lovebomb.herokuapp.com/recordFriend.xml',
+      {id: req.query.id, path:'friends/'+friendNum}
+    )
+   res.send(data)
   })
 
 }
@@ -71,9 +69,9 @@ exports.sendBombToRecipient = function(req, res){
 
 exports.recordCallDone = function(req, res){
   console.log( "RECORDING", req.query )
-  var bombRef = dbRef.child( req.query.id )
+  var lovebombRef = dbRef.child( req.query.id )
 
-  bombRef.child(req.query.path).child('call').set({
+  lovebombRef.child(req.query.path).child('call').set({
     status: req.query.CallStatus,
     recordingUrl: req.query.RecordingUrl
   })
