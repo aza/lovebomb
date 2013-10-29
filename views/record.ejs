@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
     <Say voice="woman" language="en-gb">What's something you love about <%= recipient.name %>?</Say>
-    <Record timeout="30" action="http://lovebomb.herokuapp.com/recordCallDone?id=<%= id %>" method="GET"/>
+    <Record timeout="30" action="http://lovebomb.herokuapp.com/recordCallDone?id=<%= id %>&path=<%= path %>" method="GET"/>
 </Response>

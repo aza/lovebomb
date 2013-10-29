@@ -21,28 +21,13 @@ exports.startBomb = function(req, res){
   var data = JSON.parse( req.query.data )
   console.log( data )
 
-  var dbData = {
-    bomber: {
-      number: data.bomber.number,
-      name:   data.bomber.name,
-      call: {
-        status: 'in-progress',
-        recordingUrl: null
-      },
-    },
-
-    recipient: {
-      number: data.recipient.number,
-      name:   data.recipient.name
-    }
-  }
-
-  var item = dbRef.push( dbData )
+  var item = dbRef.push( data )
   var id = item.name()
 
   dispatcher.call(
-    dbData.bomber.number,
-    'http://lovebomb.herokuapp.com/record.xml?id='+id
+    data.bomber.number,
+    'http://lovebomb.herokuapp.com/record.xml',
+    {id: id, path: 'bomber'}
   )
 
   res.send(id)
@@ -55,7 +40,8 @@ exports.sendBombToRecipient = function(req, res){
 
   dispatcher.call(
     req.query.recipientNumber,
-    'http://lovebomb.herokuapp.com/send.xml?id='+req.query.id
+    'http://lovebomb.herokuapp.com/send.xml',
+    {id: req.query.id}
   )
   res.send(req.query)
 }
@@ -65,7 +51,7 @@ exports.recordCallDone = function(req, res){
   console.log( "RECORDING", req.query )
   var bombRef = dbRef.child( req.query.id )
 
-  bombRef.child('call').set({
+  bombRef.child(req.query.path).child('call').set({
     status: 'done',
     recordingUrl: req.query.RecordingUrl
   })
