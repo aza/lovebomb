@@ -91,8 +91,12 @@ exports.genericXmlRenderer = function(req,res){
 exports.link = function(req, res){
   fetchLovebombById( req.query.q, function(data){
     console.log( data )
-    data.id = req.query.q
-    res.render('link', data )
+    if( data ){
+      data.id = req.query.q
+      res.render('link', data )
+    } else {
+      res.send('Lovebomb not found')
+    }
   })
 
 }
