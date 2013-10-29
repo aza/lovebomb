@@ -26,15 +26,10 @@
 
       $('<audio>')
         .attr({autoplay:'autoplay', controls:'controls'})
-        .append( $('<source>').attr({src:data.call.recordingUrl}))
+        .append( $('<source>').attr({src:data.bomber.call.recordingUrl}))
         .appendTo('.telling')
 
-      $.get('sendBombToRecipient', {
-        id: snapshot.name(),
-        bomberName: data.bomber.name,
-        recipientNumber: data.recipient.number,
-        recordingUrl: data.call.recordingUrl
-      })
+      $.get('sendBombToRecipient', {id: snapshot.name()})
     }
   }
 

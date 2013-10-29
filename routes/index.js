@@ -33,17 +33,18 @@ exports.startBomb = function(req, res){
   res.send(id)
 }
 
+
 exports.sendBombToRecipient = function(req, res){
   /* Perform call */
-
-  console.log( "SEND BOMB DATA", req.query)
-
-  dispatcher.call(
-    req.query.recipientNumber,
-    'http://lovebomb.herokuapp.com/send.xml',
-    {id: req.query.id}
-  )
-  res.send(req.query)
+  dbRef.child(req.query.id).once('value', function(snapshot){
+    var data = snapshot.val()
+    dispatcher.call(
+      data.recipeint.number,
+      'http://lovebomb.herokuapp.com/send.xml',
+      {id: req.query.id}
+    )
+    res.send(req.query)
+  })
 }
 
 
