@@ -59,18 +59,12 @@ exports.recordCallDone = function(req, res){
   res.send('true')
 }
 
-exports.recordXml = function(req,res){
+exports.genericXmlRenderer = function(req,res){
+  var pageName = req.params[0]
   dbRef.child(req.query.id).once('value', function(snapshot){
     var data = snapshot.val()
-    data.id = req.query.id
-    res.render('record', data)
-  })
-}
-
-exports.sendXml = function(req,res){
-  dbRef.child(req.query.id).once('value', function(snapshot){
-    var data = snapshot.val()
-    data.id = req.query.id
-    res.render('send', data)
+    // Mix all values from the query into the data passed into the template
+    Object.keys(req.query).forEach(function(key){ data[key] = req.query[key] })
+    res.render(pageName, data)
   })
 }

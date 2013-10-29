@@ -34,8 +34,9 @@ app.get('/', routes.index)
 app.get('/startBomb', routes.startBomb)
 app.get('/sendBombToRecipient', routes.sendBombToRecipient)
 app.get('/recordCallDone', routes.recordCallDone)
-app.get('/record.xml', routes.recordXml)
-app.get('/send.xml',   routes.sendXml)
+
+// Catch all for .xml files
+app.get(/^\/(\w+)\.xml$/, routes.genericXmlRenderer)
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
