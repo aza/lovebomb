@@ -33,11 +33,25 @@ exports.startBomb = function(req, res){
   res.send(id)
 }
 
-
 function fetchLovebombById( id, callback ){
   dbRef.child(id).once('value', function(snapshot){
     callback(snapshot.val())
   })
+}
+
+
+exports.callFriend = function(req, res){
+  fetchLovebombById( req.query.id, function(data){
+    console.log( "FRIEND", req.query.friendNum, data.friends[friendNum] )
+    var friendRef = dbRef.child(req.query.id).child('friends').child(friendNum)
+    friendRef.update({
+      call:{
+        recordingUrl: 'nothing',
+        status: 'completed'
+      }
+    })
+  })
+
 }
 
 exports.sendBombToRecipient = function(req, res){
@@ -58,7 +72,7 @@ exports.recordCallDone = function(req, res){
   var bombRef = dbRef.child( req.query.id )
 
   bombRef.child(req.query.path).child('call').set({
-    status: 'done',
+    status: req.query.CallStatus,
     recordingUrl: req.query.RecordingUrl
   })
 

@@ -15,12 +15,23 @@
 
   }
 
-  function onLovebombUpdate( snapshot ){
-    data = snapshot.val()
 
-    console.log( "DATA", data )
+  function onFriendsUpdate(snapshot){
+    var data = snapshot.val()
+    console.log( "FRIENDS", data )
 
-    if( data.bomber.call && data.bomber.call.status == "done" ){
+    if( data[0].call && data[0].call.status == "completed" ){
+      console.log( "ALL DONE WITH FRIENDS" )
+      $.get('sendBombToRecipient', {id: snapshot.name()})
+    }
+  }
+
+  function onBomberUpdate( snapshot ){
+    var data = snapshot.val()
+    console.log('here', data)
+
+    // TODO: Only do this the first time...
+    if( data.bomber.call && data.bomber.call.status == "completed" ){
       $('.starting').hide()
       $('.telling').show()
 
@@ -29,7 +40,10 @@
         .append( $('<source>').attr({src:data.bomber.call.recordingUrl}))
         .appendTo('.telling')
 
-      $.get('sendBombToRecipient', {id: snapshot.name()})
+      $.get('callFriend', {id: snapshot.name(), friendNum:0})
+
+      var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + snapshot.name())
+      lovebombRef.child('friends').on('value', onFriendsUpdate)
     }
   }
 
@@ -75,12 +89,10 @@
     $('.loggedin').hide()
     $('.starting').show()
 
-    $.get('startBomb', {data: JSON.stringify(params)}, function(data){
-      console.log( data )
-      console.log( 'lovebombRefUrl', FIREBASE_BASE_URL + 'lovebombs/' + data )
-      var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + data)
-      lovebombRef.on('value', onLovebombUpdate )
-      console.log(data)
+    $.get('startBomb', {data: JSON.stringify(params)}, function(id){
+      console.log('hi')
+      var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + id)
+      lovebombRef.child('bomber').once('value', onBomberUpdate )
     })
   })
 
