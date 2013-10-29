@@ -30,7 +30,7 @@ exports.call = function(number, actionUrl, urlParams){
   serializedParams = Object.keys(urlParams).map(function(p){return p + '=' + encodeURIComponent(urlParams[p])}).join('&')
   if( serializedParams.length > 0 ) serializedParams = "?" + serializedParams
   console.log( actionUrl + serializedParams )
-  return;
+  //return;
   client.makeCall({
       to:'+1' + number, // Any number Twilio can call
       from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
