@@ -6,15 +6,17 @@
     <% } %>
 
     <Say voice="woman" language="en-gb">Have made you a love bomb. This is why you are loved.</Say>
+    <Say voice="woman" language="en-gb"><%= bomber.name %> said</Say>
     <Play><%= bomber.call.recordingUrl %></Play>
     <% for(var i=0; i<friends.length;i++) {%>
-      <Play><%= friends[0].call.recordingUrl %></Play>
+      <Say voice="woman" language="en-gb"><%= friends[i].name %> said</Say>
+      <Play><%= friends[i].call.recordingUrl %></Play>
     <% } %>
 
     <Say voice="woman" language="en-gb">And once again, because you shouldn't hear it just once.</Say>
     <Play><%= bomber.call.recordingUrl %></Play>
     <% for(var i=0; i<friends.length;i++) {%>
-      <Play><%= friends[0].call.recordingUrl %></Play>
+      <Play><%= friends[i].call.recordingUrl %></Play>
     <% } %>
     <Say voice="woman" language="en-gb">Now go love bomb someone you care about!</Say>
 </Response>
