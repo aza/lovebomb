@@ -42,7 +42,8 @@ function fetchLovebombById( id, callback ){
 
 exports.callFriend = function(req, res){
   fetchLovebombById( req.query.id, function(data){
-    console.log( "FRIEND", req.query.friendNum, data.friends[friendNum] )
+    var friendNum = req.query.friendNum
+    console.log( "FRIEND", friendNum, data.friends[friendNum] )
     var friendRef = dbRef.child(req.query.id).child('friends').child(friendNum)
     friendRef.update({
       call:{
@@ -50,6 +51,7 @@ exports.callFriend = function(req, res){
         status: 'completed'
       }
     })
+    res.send(data)
   })
 
 }

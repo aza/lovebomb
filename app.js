@@ -34,6 +34,7 @@ app.get('/', routes.index)
 app.get('/startBomb', routes.startBomb)
 app.get('/sendBombToRecipient', routes.sendBombToRecipient)
 app.get('/recordCallDone', routes.recordCallDone)
+app.get('/callFriend', routes.callFriend)
 
 // Catch all for .xml files
 app.get(/^\/(\w+)\.xml$/, routes.genericXmlRenderer)
