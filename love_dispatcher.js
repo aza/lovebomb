@@ -24,12 +24,17 @@ client.sendMessage({
 });
 */
 
-exports.call = function(number, actionUrl){
+exports.call = function(number, actionUrl, urlParams){
   console.log( "MAKING CALL")
+  urlParams = urlParams || {}
+  serializedParams = Object.keys(urlParams).map(function(p){return p + '=' + encodeURIComponent(urlParams[p])}).join('&')
+  if( serializedParams.length > 0 ) serializedParams = "?" + serializedParams
+  console.log( actionUrl + serializedParams )
+  return;
   client.makeCall({
       to:'+1' + number, // Any number Twilio can call
       from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
-      url: actionUrl,
+      url: actionUrl + serializedParams,
       method: "GET"
   }, function(err, responseData) {
 
