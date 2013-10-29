@@ -44,7 +44,7 @@ exports.sendBombToRecipient = function(req, res){
   /* Perform call */
   fetchLovebombById(req.query.id, function(data){
     dispatcher.call(
-      data.recipeint.number,
+      data.recipient.number,
       'http://lovebomb.herokuapp.com/send.xml',
       {id: req.query.id}
     )
