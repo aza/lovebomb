@@ -34,16 +34,21 @@ exports.startBomb = function(req, res){
 }
 
 
+function fetchLovebombById( id, callback ){
+  dbRef.child(id).once('value', function(snapshot){
+    callback(snapshot.val())
+  })
+}
+
 exports.sendBombToRecipient = function(req, res){
   /* Perform call */
-  dbRef.child(req.query.id).once('value', function(snapshot){
-    var data = snapshot.val()
+  fetchLovebombById(req.query.id, function(data){
     dispatcher.call(
       data.recipeint.number,
       'http://lovebomb.herokuapp.com/send.xml',
       {id: req.query.id}
     )
-    res.send(req.query)
+    res.send("Sending")
   })
 }
 
@@ -62,8 +67,7 @@ exports.recordCallDone = function(req, res){
 
 exports.genericXmlRenderer = function(req,res){
   var pageName = req.params[0]
-  dbRef.child(req.query.id).once('value', function(snapshot){
-    var data = snapshot.val()
+  fetchLovebombById(req.query.id, function(data){
     // Mix all values from the query into the data passed into the template
     Object.keys(req.query).forEach(function(key){ data[key] = req.query[key] })
     res.render(pageName, data)
