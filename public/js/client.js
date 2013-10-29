@@ -44,7 +44,7 @@
 
       $.get('callFriend', {id: id, friendNum:0})
 
-      var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + snapshot.name())
+      var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + id)
       lovebombRef.child('friends').on('value', onFriendsUpdate)
     }
   }
