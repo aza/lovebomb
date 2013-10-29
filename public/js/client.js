@@ -20,7 +20,7 @@
 
     console.log( "DATA", data )
 
-    if( data.call && data.call.status == "done" ){
+    if( data.bomber.call && data.bomber.call.status == "done" ){
       $('.starting').hide()
       $('.telling').show()
 
