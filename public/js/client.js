@@ -1,7 +1,6 @@
 (function(){
   var FIREBASE_BASE_URL = 'https://lovebomb.firebaseio.com/'
 
-
   function onLoggedIn(user){
     $('h1').text('Hello, ' + user.first_name)
     $('.loggedin').show()
@@ -72,7 +71,10 @@
       recipient: {
         name: $('#recipientName').val(),
         number: $('#recipientNumber').val()
-      }
+      },
+      friends: [
+        {name: $('#name2').val(), number:$('#number2').val() }
+      ]
     }
 
     $('.loggedin').hide()
