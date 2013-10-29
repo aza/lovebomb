@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lovebomb</title>
+        <link rel="stylesheet" href='/stylesheets/style.css'/>
+        <style>
+        input {
+            font-size: 24px;
+            padding: 10px;
+        }
+
+
+        </style>
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        </script>
+        <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+        <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+        <script src="/js/typeahead.min.js"></script>
+        <script src="http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js"></script>
+    </head>
+
+    <body>
+
+    <div class="container">
+
+        <div class="loveRecipientFrame">
+            <img class="loveRecipient">
+        </div>
+
+        <input class="typeahead" placeholder="Who needs love?"/>
+
+    </div>
+    
+    <script>
+
+    var FIREBASE_BASE_URL = 'https://lovebomb.firebaseio.com/'
+
+    var lbRef = new Firebase(FIREBASE_BASE_URL)
+    var auth = new FirebaseSimpleLogin( lbRef, function(error, user){
+        if( error ) {console.log("ERROR LOGIN", error)}
+        else if(user){
+          console.log( "USER ID:", user.id, "Provider:", user.provider, user)
+          window.user = user //TODO: Better way to do this?
+
+          setupTypeahead();
+        }
+        else{
+          console.log("logged out")
+          window.user = null
+        }
+    });
+
+    setTimeout(function(){
+        auth.login('facebook');    
+    }, 1000);
+
+    function setupTypeahead() {
+        var fbAccessToken = user.accessToken;
+        var prefetchUrl = 'https://graph.facebook.com/' + user.id + 
+            '/friends?fields=id,name,location,timezone' +
+            '&access_token=' + fbAccessToken;
+
+        /*var mutualFriendsUrl = 'https://graph.facebook.com/' + user.id + 
+            '/mutualfriends/azaraskin?fields=id,name,location,timezone' +
+            '&access_token=' + fbAccessToken;*/
+
+        var prefetchOptions = {
+            url: prefetchUrl,
+            ttl: 86400000,
+            filter: function(parsedResponse) {
+                return parsedResponse.data.map( function(fbUser) {
+                     return {
+                        value: fbUser.name,
+                        tokens: fbUser.name.split(" "),
+                        name: fbUser.name,
+                        id: fbUser.id,
+                        location: fbUser.location ? fbUser.location.name : "",
+                        profileImageUrl: 'https://graph.facebook.com/' + fbUser.id + '/picture'
+                    };
+                });
+            }
+        };
+
+        // single dataset
+        var fbUserField = $('input.typeahead');
+        fbUserField.typeahead({
+            suggestions: 'people',
+            prefetch: prefetchOptions,
+            limit: 10,
+            template: [     
+                '<img class="user-photo" src="{{profileImageUrl}}"/>',                
+                '<span class="user-name">{{name}}</span>',
+                '<span class="user-location">{{location}}</span>' 
+            ].join(''),
+            engine: Hogan
+        });
+
+        fbUserField.bind('typeahead:selected', function(obj, value) {
+            console.log(value);
+
+            var largeProfilePic = 'https://graph.facebook.com/'+value.id+'/picture?type=large';
+            $('div.loveRecipientFrame').css("background", "url(" + largeProfilePic + ") no-repeat");
+            //$('div.loveRecipientFrame').css("background-repeat", "no-repeat");
+        });
+
+        console.log("setup typeahead");
+    }
+
+    </script>
+
+    </body>
+
+
+</html>
