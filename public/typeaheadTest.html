@@ -66,7 +66,6 @@
 
         var prefetchOptions = {
             url: prefetchUrl,
-            ttl: 86400000,
             filter: function(parsedResponse) {
                 return parsedResponse.data.map( function(fbUser) {
                      return {
@@ -85,14 +84,14 @@
         var fbUserField = $('input.typeahead');
         fbUserField.typeahead({
             suggestions: 'people',
-            local: '/js/countries.json',
-            limit: 10
-            /*template: [     
+            prefetch: prefetchOptions,
+            limit: 5,
+            template: [     
                 '<img class="user-photo" src="{{profileImageUrl}}"/>',                
                 '<span class="user-name">{{name}}</span>',
                 '<span class="user-location">{{location}}</span>' 
             ].join(''),
-            engine: Hogan*/
+            engine: Hogan
         });
 
 
@@ -101,10 +100,10 @@
             console.log(":selected");
             console.log(value);
 
-            /*var largeProfilePic = 'https://graph.facebook.com/'+value.id+'/picture?width=200&height=200';
-            $('div.loveRecipientFrame').css("background", "url(" + largeProfilePic + ") no-repeat");*/
+            var largeProfilePic = 'https://graph.facebook.com/'+value.id+'/picture?width=200&height=200';
+            $('div.loveRecipientFrame').css("background", "url(" + largeProfilePic + ") no-repeat");
 
-            //$('div.loveRecipientFrame').css("background-repeat", "no-repeat");
+            $('div.loveRecipientFrame').css("background-repeat", "no-repeat");
         });
 
         fbUserField.bind("typeahead:autocompleted", function(obj, value) {

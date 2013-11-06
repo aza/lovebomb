@@ -2,9 +2,13 @@
   var FIREBASE_BASE_URL = 'https://lovebomb.firebaseio.com/'
 
   function onLoggedIn(user){
-    $('h1').text('Hello, ' + user.first_name)
+    $('h1').text('Who needs love?');
     $('.loggedin').show()
     $('.loggedout').hide()
+    $('.recipientPortrait').hide()
+
+    setupFBTypeahead( $('.recipientTypeahead') )
+    setupFBTypeahead( $('.friendTypeahead') )
   }
 
 
@@ -12,7 +16,61 @@
     $('h1').text('LOVEBOMB')
     $('.loggedin').hide()
     $('.loggedout').show()
+  }
 
+  function setupFBTypeahead(inputField, optionalMutualFriends) {
+    var prefetchUrl = 'https://graph.facebook.com/' + window.user.id + 
+        '/friends?fields=id,name,location,timezone' +
+        '&access_token=' + window.user.accessToken;
+
+    /*var mutualFriendsUrl = 'https://graph.facebook.com/' + user.id + 
+        '/mutualfriends/azaraskin?fields=id,name,location,timezone' +
+        '&access_token=' + user.accessToken;*/
+
+    var prefetchOptions = {
+        url: prefetchUrl,
+        filter: function(parsedResponse) {
+            return parsedResponse.data.map( function(fbUser) {
+                 return {
+                    value: fbUser.name,
+                    tokens: fbUser.name.split(" "),
+                    name: fbUser.name,
+                    id: fbUser.id,
+                    location: fbUser.location ? fbUser.location.name : "",
+                    profileImageUrl: 'https://graph.facebook.com/' + fbUser.id + '/picture'
+                };
+            });
+        }
+    };
+
+    // Setup the typeahead!
+    inputField.typeahead({
+        suggestions: 'people',
+        prefetch: prefetchOptions,
+        limit: 5,
+        template: [     
+            '<img class="user-photo" src="{{profileImageUrl}}"/>',                
+            '<span class="user-name">{{name}}</span>',
+            '<span class="user-location">{{location}}</span>' 
+        ].join(''),
+        engine: Hogan
+    });
+
+
+    inputField.bind('typeahead:selected', onRecipientChosen);
+    inputField.bind("typeahead:autocompleted", function(obj, value) {
+        console.log(":autocompleted");
+    });
+
+    console.log("setup typeahead");
+  }
+
+  function onRecipientChosen(obj, value) {
+    var largeProfilePic = 'https://graph.facebook.com/'+value.id+'/picture?width=200&height=200';
+    
+    $('.recipientPortrait').css("background", "url(" + largeProfilePic + ") no-repeat");
+    $('.recipientPortrait').css("background-repeat", "no-repeat");
+    $('.recipientPortrait').show()
   }
 
 
@@ -57,8 +115,8 @@
     if( error ) {console.log("ERROR LOGIN", error)}
     else if(user){
       console.log( "USER ID:", user.id, "Provider:", user.provider, user)
-      onLoggedIn(user)
       window.user = user //TODO: Better way to do this?
+      onLoggedIn(user)
     }
     else{
       console.log("logged out")

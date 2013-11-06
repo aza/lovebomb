@@ -6,10 +6,14 @@
     <% } %>
 
     <Say voice="woman" language="en-gb">Have made you a love bomb. This is why you are loved.</Say>
-    <Say voice="woman" language="en-gb"><%= bomber.name %> said</Say>
+    <!--
+      Say voice="woman" language="en-gb"><%= bomber.name %> said</Say
+    -->
     <Play><%= bomber.call.recordingUrl %></Play>
     <% for(var i=0; i<friends.length;i++) {%>
-      <Say voice="woman" language="en-gb"><%= friends[i].name %> said</Say>
+      <!-- 
+        Say voice="woman" language="en-gb"><%= friends[i].name %> said</Say 
+      -->
       <Play><%= friends[i].call.recordingUrl %></Play>
     <% } %>
 
