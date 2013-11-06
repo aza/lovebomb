@@ -85,25 +85,35 @@
         var fbUserField = $('input.typeahead');
         fbUserField.typeahead({
             suggestions: 'people',
-            prefetch: prefetchOptions,
-            limit: 10,
-            template: [     
+            local: '/js/countries.json',
+            limit: 10
+            /*template: [     
                 '<img class="user-photo" src="{{profileImageUrl}}"/>',                
                 '<span class="user-name">{{name}}</span>',
                 '<span class="user-location">{{location}}</span>' 
             ].join(''),
-            engine: Hogan
+            engine: Hogan*/
         });
 
+
+
         fbUserField.bind('typeahead:selected', function(obj, value) {
+            console.log(":selected");
             console.log(value);
 
-            var largeProfilePic = 'https://graph.facebook.com/'+value.id+'/picture?type=large';
-            $('div.loveRecipientFrame').css("background", "url(" + largeProfilePic + ") no-repeat");
+            /*var largeProfilePic = 'https://graph.facebook.com/'+value.id+'/picture?width=200&height=200';
+            $('div.loveRecipientFrame').css("background", "url(" + largeProfilePic + ") no-repeat");*/
+
             //$('div.loveRecipientFrame').css("background-repeat", "no-repeat");
         });
 
+        fbUserField.bind("typeahead:autocompleted", function(obj, value) {
+            console.log(":autocompleted");
+
+        });
+
         console.log("setup typeahead");
+        //$('input.typeahead').typeahead('destroy');
     }
 
     </script>
