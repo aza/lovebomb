@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>B2029BBD-C955-4B68-B72A-C542B40AA7BF</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Lovebomb</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5A1DB22F-93B1-43F1-B5AD-11842098BC2D</key>
+		<string>https://github.com/aza/lovebomb</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ios app/Lovebomb/Lovebomb.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5A1DB22F-93B1-43F1-B5AD-11842098BC2D</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/aza/lovebomb</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5A1DB22F-93B1-43F1-B5AD-11842098BC2D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5A1DB22F-93B1-43F1-B5AD-11842098BC2D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>lovebomb</string>
+		</dict>
+	</array>
+</dict>
+</plist>
