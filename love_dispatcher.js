@@ -28,7 +28,7 @@ client.sendMessage({
 exports.text = function(number, actionUrl, params){
   console.log( "SENDING TEXT")
   client.sendMessage({
-      body: params.message
+      body: params.message,
       to:'+1' + number, // Any number Twilio can call
       from: '+16503535591', // A number you bought from Twilio and can use for outbound communication
       method: "GET"
