@@ -119,39 +119,46 @@
     setupFBTypeahead( $(friendNameInput), null );
   }
 
+  function allFriendsRecordedMessage(snapshot) {
+    var data = snapshot.val()
+
+    for (var i; i<data.length; i++) {
+      if (!data[i].call || data[i].call.status != "completed") 
+        return false;
+    }
+
+    return true;
+  }
+
   function onFriendsUpdate(snapshot, id){
     var data = snapshot.val()
     console.log( "FRIENDS", data, id)
 
     var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + id)
+    var bomber = lovebombRef.child('bomber').val();
+    var recipient = lovebombRef.child('recipient').val();
 
-
-    var allFriendsCalled = true;
+    // Loop through friends
     for (var i=0; i< data.length; i++) 
     {
       // If this friend not called yet, call them!
       if( !data[i].call ) {
         $.get('callFriend', {id: id, friendNum:i})
-        allFriendsCalled = false;
         break;
       }
 
       // If this friend called but didn't answer, text them!
-      if ((data[i].call && data[i].call.status != "completed") {
-        if (!data[i].text || data[i].text.status != "completed") {
-        var smsText = bomberName + " is making a lovebomb for " + recipientName + 
+      if (data[i].call && data[i].call.status != "completed" || !data[i].text) {
+        var smsText = bomber.name.split(" ")[0] + " is making a lovebomb for " + recipient.name.split(" ")[0] + 
                       ". Have 10 seconds to record something you love about them? " + 
-                      "http://lovebomb.heroku.com/" + id + "?invite"})
-
+                      "http://lovebomb.heroku.com/" + id + "?invite";
 
         $.get('textFriend', {id: id, friendNum:i, message: smsText});
-
-        allFriendsCalled = false;
         break;
       }
     }
 
-    if (allFriendsCalled) {
+    if (allFriendsRecordedMessage(snapshot)) {
       console.log( "ALL DONE WITH FRIENDS" )
       $.get('sendBombToRecipient', {id: id})
     }
