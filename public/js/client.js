@@ -8,17 +8,16 @@
     $('.loggedin').show()
     $('.loggedout').hide()
     $('.recipientPortrait').hide()
-
-    setupFBTypeahead( $('.recipientTypeahead'), onRecipientSelected)
-
-    // Create one friend input by default
-    addFriendInput()
-
     $(".addFriend").on("click", function (e) {
       console.log("add friend clicked!");
       addFriendInput();
       e.preventDefault();
     });
+
+    setupFBTypeahead( $('.recipientTypeahead'), onRecipientSelected)
+
+    // Create one friend input by default
+    addFriendInput()
   }
 
 
@@ -122,9 +121,37 @@
 
   function onFriendsUpdate(snapshot, id){
     var data = snapshot.val()
-    console.log( "FRIENDS", data )
+    console.log( "FRIENDS", data, id)
 
-    if( data[0].call && data[0].call.status == "completed" ){
+    var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + id)
+
+
+    var allFriendsCalled = true;
+    for (var i=0; i< data.length; i++) 
+    {
+      // If this friend not called yet, call them!
+      if( !data[i].call ) {
+        $.get('callFriend', {id: id, friendNum:i})
+        allFriendsCalled = false;
+        break;
+      }
+
+      // If this friend called but didn't answer, text them!
+      if ((data[i].call && data[i].call.status != "completed") {
+        if (!data[i].text || data[i].text.status != "completed") {
+        var smsText = bomberName + " is making a lovebomb for " + recipientName + 
+                      ". Have 10 seconds to record something you love about them? " + 
+                      "http://lovebomb.heroku.com/" + id + "?invite"})
+
+
+        $.get('textFriend', {id: id, friendNum:i, message: smsText});
+
+        allFriendsCalled = false;
+        break;
+      }
+    }
+
+    if (allFriendsCalled) {
       console.log( "ALL DONE WITH FRIENDS" )
       $.get('sendBombToRecipient', {id: id})
     }
@@ -145,6 +172,7 @@
         .attr({autoplay:'autoplay', controls:'controls'})
         .append( $('<source>').attr({src:data.call.recordingUrl}))
         .appendTo('.telling')
+
 
       $.get('callFriend', {id: id, friendNum:0})
 

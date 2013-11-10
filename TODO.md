@@ -11,6 +11,7 @@ Feature Categories:
 DISTRIBUTION
 LOVE_QUALITY
 CALL_COMPLIANCE
+POKEYOKE
 
 
 Features:
@@ -19,10 +20,13 @@ Features:
 * DISTRIBUTION: Support ability to invite more people from permalink page (after recording, want to invite someone else?)
 * DISTRIBUTION: Create permalink url once creator connects w/ FB and chooses recipient
 * LOVE_QUALITY: Let bombers record multiple love message after recording first one (prompt, "if you'd like to leave another, press 1") then store in same lovebomb
+* POKEYOKE: Don't let people invite duplicates (don't send duplicate invites to same person who multiple people invite separately)
+* POKEYOKE: Don't call/text people during bad moments in time zone
 * DISTRIBUTION: Let bombers connect with FB and invite other friends who haven't been invited yet)
 * CALL_COMPLIANCE: If bomber misses call, allow them to call Twilio number back and route them back to the original lovebomb (look up incoming caller phone #, match against most recent lovebomb they've been invited to)
 * CALL_COMPLIANCE: Use FB info for contact name and only call during timezone-appropriate hours
 * LOVE_QUALITY: Prompt lovebomb starter for "why does X need love right now?" to get a reason (eg. X just started chemotherapy, X has been feeling down, X's dog just died, X kicked ass on their project, etc) and then play back that reason to the other invited lovebombers (philosophy: when a man has a 'why', they can withstand almost any how). Experiment with audio & written versions (for  more persuasive invitations too – eg text & email invitations to make lovebomb)
+* 
 
 Long-term:
 
@@ -33,4 +37,9 @@ Ideas:
 
 Data:
 
-Tristan's Test Google Voice number: (872) 228-6501
+Tristan's Test Google Voice number: 
+(872) 228-6501
+8722286501
+
+Tristan's Test Android phone number:
+6502153066

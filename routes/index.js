@@ -39,6 +39,27 @@ function fetchLovebombById( id, callback ){
   })
 }
 
+exports.textFriend = function(req, res){
+  fetchLovebombById( req.query.id, function(data) {
+    var friendNum = req.query.friendNum
+
+    console.log( "TEXTFRIEND", friendNum, data.friends[friendNum] )
+    dispatcher.text(
+      data.friends[friendNum].number,
+      {id: req.query.id, message: req.query.message}
+    )
+
+    var lovebombRef = dbRef.child( req.query.id )
+    lovebombRef.child('friends/'+friendNum).child('text').set({
+      status: "complete",
+      date: (new Date()).toUTCString()
+    })
+
+    res.send(data)
+  })
+
+}
+
 
 exports.callFriend = function(req, res){
   fetchLovebombById( req.query.id, function(data){
