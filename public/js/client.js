@@ -1,5 +1,7 @@
 (function(){
   var FIREBASE_BASE_URL = 'https://lovebomb.firebaseio.com/'
+  var FB_USERID_KEY = 'fbId'
+  var FRIEND_COUNTER = 0
 
   function onLoggedIn(user){
     $('h1').text('Who needs love?');
@@ -7,8 +9,16 @@
     $('.loggedout').hide()
     $('.recipientPortrait').hide()
 
-    setupFBTypeahead( $('.recipientTypeahead') )
-    setupFBTypeahead( $('.friendTypeahead') )
+    setupFBTypeahead( $('.recipientTypeahead'), onRecipientSelected)
+
+    // Create one friend input by default
+    addFriendInput()
+
+    $(".addFriend").on("click", function (e) {
+      console.log("add friend clicked!");
+      addFriendInput();
+      e.preventDefault();
+    });
   }
 
 
@@ -18,7 +28,17 @@
     $('.loggedout').show()
   }
 
-  function setupFBTypeahead(inputField, optionalMutualFriends) {
+  function onRecipientSelected(fbUser) {
+    console.log("onRecipientSelected");
+
+    var largeProfilePic = 'https://graph.facebook.com/'+fbUser.id+'/picture?width=200&height=200';
+    
+    $('.recipientPortrait').css("background", "url(" + largeProfilePic + ") no-repeat");
+    $('.recipientPortrait').css("background-repeat", "no-repeat");
+    $('.recipientPortrait').show()
+  }
+
+  function setupFBTypeahead(inputField, onSelectionCallback) {
     var prefetchUrl = 'https://graph.facebook.com/' + window.user.id + 
         '/friends?fields=id,name,location,timezone' +
         '&access_token=' + window.user.accessToken;
@@ -50,14 +70,23 @@
         limit: 5,
         template: [     
             '<img class="user-photo" src="{{profileImageUrl}}"/>',                
-            '<span class="user-name">{{name}}</span>',
-            '<span class="user-location">{{location}}</span>' 
+            '<span class="user-name">{{name}}</span>'
         ].join(''),
         engine: Hogan
     });
 
 
-    inputField.bind('typeahead:selected', onRecipientChosen);
+    inputField.bind('typeahead:selected', function(obj, value) {
+      // 'value' contains the object created by filter & map function above
+      // Let's store the selected user's FB id into the field
+      $(this).attr(FB_USERID_KEY, value.id);
+
+      console.log("setting up typeahead with attr " + $(this).attr(FB_USERID_KEY))
+
+      if (onSelectionCallback) {
+        onSelectionCallback(value);
+      } 
+    });
     inputField.bind("typeahead:autocompleted", function(obj, value) {
         console.log(":autocompleted");
     });
@@ -65,14 +94,31 @@
     console.log("setup typeahead");
   }
 
-  function onRecipientChosen(obj, value) {
-    var largeProfilePic = 'https://graph.facebook.com/'+value.id+'/picture?width=200&height=200';
-    
-    $('.recipientPortrait').css("background", "url(" + largeProfilePic + ") no-repeat");
-    $('.recipientPortrait').css("background-repeat", "no-repeat");
-    $('.recipientPortrait').show()
-  }
+  function addFriendInput() {
+    FRIEND_COUNTER++;
 
+    var friendNameInput = document.createElement('input');
+    friendNameInput.type = "text";
+    friendNameInput.id = "friend" + FRIEND_COUNTER;
+    friendNameInput.class = "friendTypeahead";
+    friendNameInput.placeholder = "Friend's name?";
+    friendNameInput.value = "";
+
+    var friendPhoneInput = document.createElement('input');
+    friendPhoneInput.type = "tel";
+    friendPhoneInput.id = "number" + FRIEND_COUNTER;
+    friendPhoneInput.placeholder = "Friend's number?";
+    friendPhoneInput.value = "";
+
+    $(".friends").append($(friendNameInput));
+    $('.friends').append($(friendPhoneInput));
+
+    console.log("addFriendInput");
+    console.log(friendPhoneInput);
+
+    // Add autocomplete support to the friend field
+    setupFBTypeahead( $(friendNameInput), null );
+  }
 
   function onFriendsUpdate(snapshot, id){
     var data = snapshot.val()
@@ -134,18 +180,27 @@
   })
 
   $('#submit').click(function(){
+    var friendList = [];
+    for (i=1; i <= FRIEND_COUNTER; i++) {
+      friendList.push({
+        name: $("#friend" + i).val(),
+        number: $("#number" + i).val(),
+        fbId: $("#friend" + i).attr(FB_USERID_KEY)
+      })
+    }
+
     var params = {
       bomber:{
         name: user.displayName,
-        number: $('#bomberNumber').val()
+        number: $('#bomberNumber').val(),
+        fbId: user.id
       },
       recipient: {
         name: $('#recipientName').val(),
-        number: $('#recipientNumber').val()
+        number: $('#recipientNumber').val(),
+        fbId: $('#recipientName').attr(FB_USERID_KEY)
       },
-      friends: [
-        {name: $('#name2').val(), number:$('#number2').val() }
-      ]
+      friends: friendList
     }
 
     $('.loggedin').hide()

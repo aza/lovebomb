@@ -172,4 +172,8 @@ div.recipientPortrait {
   filter: alpha(opacity=0);
 }
 
+.addFriend {
+  color: #0066cc;
+}
+
 

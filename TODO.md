@@ -7,7 +7,6 @@ Call prompt ideas:
 "What should P know about him/herself that ?"
 
 
-
 Feature Categories:
 DISTRIBUTION
 LOVE_QUALITY
@@ -15,6 +14,9 @@ CALL_COMPLIANCE
 
 
 Features:
+* DISTRIBUTION: Attach FB ID to each recipient/friend/bomber name, so we can associate back to an FB account
+* DISTRIBUTION: Support ability to invite more people from home screen
+* DISTRIBUTION: Support ability to invite more people from permalink page (after recording, want to invite someone else?)
 * DISTRIBUTION: Create permalink url once creator connects w/ FB and chooses recipient
 * LOVE_QUALITY: Let bombers record multiple love message after recording first one (prompt, "if you'd like to leave another, press 1") then store in same lovebomb
 * DISTRIBUTION: Let bombers connect with FB and invite other friends who haven't been invited yet)
@@ -25,3 +27,10 @@ Features:
 Long-term:
 
 
+Ideas:
+* GREETING/INVITATION: Default to computer voice, but let instigator record a custom invitation, e.g. "Victoria just started chemotherapy last week and I wanted her friends to say how much they love her and support her. Could you record a quick message for her?"
+
+
+Data:
+
+Tristan's Test Google Voice number: (872) 228-6501

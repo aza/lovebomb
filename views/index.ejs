@@ -10,8 +10,6 @@
         <script src="http://twitter.github.com/hogan.js/builds/2.0.0/hogan-2.0.0.js"></script>
         <script type='text/javascript' id='lt_ws' src='http://localhost:59886/socket.io/lighttable/ws.js'></script>
         </script>
-
-
     </head>
 
     <body>
@@ -22,13 +20,20 @@
             <div class="recipientPortrait">
                 <img class="recipientPortrait">
             </div>
-            <input type="text" id="recipientName" class="recipientTypeahead" placeholder="who needs the love?" value=""/>
+            <input type="text" id="recipientName" class="recipientTypeahead" placeholder="who needs love?" value=""/>
             <br/>
             <input type="tel" id="recipientNumber" placeholder="what's their phone number?" value="" other="6508045596"/>
             <input type="tel" id="bomberNumber" placeholder="what's your phone number?" value=""/>
             <br/>
-            <input type="text" id="name2" class="friendTypeahead" placeholder="Friend's Name" value=""/>
-            <input type="tel"  id="number2" placeholder="Friend's Number" value=""/>
+
+            <div class="friends">
+                <!-- TH: FRIEND INPUTS ADDED PROGRAMMATICALLY NOW
+                input type="text" id="name2" class="friendTypeahead" placeholder="Friend's Name" value=""/>
+                <input type="tel"  id="number2" placeholder="Friend's Number" value=""/
+                -->
+            </div>
+
+            <div><a class="addFriend" href="#">+ Add friend to invite</a></div>
 
             <div class="button" id="submit">Go!</div>
             <br/>
@@ -40,7 +45,7 @@
         </div>
 
         <div class="telling" style="display:none;">
-          <h2>Sending this Lovebomb!</h2>
+          <h2>Sending the Lovebomb!</h2>
         </div>
 
         <div id="link"><a href="#"></a></div>
