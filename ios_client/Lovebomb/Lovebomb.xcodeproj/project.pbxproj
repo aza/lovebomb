@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52C73C79182B70A40077D75D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C73C78182B70A40077D75D /* FacebookSDK.framework */; };
+		52C73C7A182B70A40077D75D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C73C78182B70A40077D75D /* FacebookSDK.framework */; };
 		52E93F971826101D002B63E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E93F961826101D002B63E1 /* Foundation.framework */; };
 		52E93F991826101D002B63E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E93F981826101D002B63E1 /* CoreGraphics.framework */; };
 		52E93F9B1826101D002B63E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E93F9A1826101D002B63E1 /* UIKit.framework */; };
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		52C73C78182B70A40077D75D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		52E93F931826101D002B63E1 /* Lovebomb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lovebomb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52E93F961826101D002B63E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		52E93F981826101D002B63E1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -61,6 +64,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52E93F991826101D002B63E1 /* CoreGraphics.framework in Frameworks */,
+				52C73C79182B70A40077D75D /* FacebookSDK.framework in Frameworks */,
 				52E93F9B1826101D002B63E1 /* UIKit.framework in Frameworks */,
 				52E93F971826101D002B63E1 /* Foundation.framework in Frameworks */,
 			);
@@ -71,6 +75,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52E93FB61826101E002B63E1 /* XCTest.framework in Frameworks */,
+				52C73C7A182B70A40077D75D /* FacebookSDK.framework in Frameworks */,
 				52E93FB81826101E002B63E1 /* UIKit.framework in Frameworks */,
 				52E93FB71826101E002B63E1 /* Foundation.framework in Frameworks */,
 			);
@@ -101,6 +106,7 @@
 		52E93F951826101D002B63E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				52C73C78182B70A40077D75D /* FacebookSDK.framework */,
 				52E93F961826101D002B63E1 /* Foundation.framework */,
 				52E93F981826101D002B63E1 /* CoreGraphics.framework */,
 				52E93F9A1826101D002B63E1 /* UIKit.framework */,
@@ -379,6 +385,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lovebomb/Lovebomb-Prefix.pch";
 				INFOPLIST_FILE = "Lovebomb/Lovebomb-Info.plist";
@@ -393,6 +403,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Documents/FacebookSDK,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lovebomb/Lovebomb-Prefix.pch";
 				INFOPLIST_FILE = "Lovebomb/Lovebomb-Info.plist";
@@ -411,6 +425,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lovebomb/Lovebomb-Prefix.pch";
@@ -434,6 +449,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					/Documents/FacebookSDK,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lovebomb/Lovebomb-Prefix.pch";
@@ -463,6 +479,7 @@
 				52E93FC71826101E002B63E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52E93FC81826101E002B63E1 /* Build configuration list for PBXNativeTarget "LovebombTests" */ = {
 			isa = XCConfigurationList;
@@ -471,6 +488,7 @@
 				52E93FCA1826101E002B63E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -15,6 +15,7 @@ POKEYOKE
 
 
 Features:
+* WELCOME: Welcome screen add example love phrases floating by lightly in the background of the page so people get the picture quickly (eg. "I love her gentle smile", "He's my best friend", "I love how supportive and giving she is")
 * DISTRIBUTION: Attach FB ID to each recipient/friend/bomber name, so we can associate back to an FB account
 * DISTRIBUTION: Support ability to invite more people from home screen
 * DISTRIBUTION: Support ability to invite more people from permalink page (after recording, want to invite someone else?)

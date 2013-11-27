@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 @interface LBViewController : UIViewController
+
+- (IBAction)pickFriendsButtonClick:(id)sender;
+
 
 @end

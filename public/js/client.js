@@ -17,7 +17,7 @@
     setupFBTypeahead( $('.recipientTypeahead'), onRecipientSelected)
 
     // Create one friend input by default
-    addFriendInput()
+    //addFriendInput()
   }
 
 
@@ -181,9 +181,17 @@
         .appendTo('.telling')
 
 
-      $.get('callFriend', {id: id, friendNum:0})
+      // We used to call friends here, but now we'll try texting instead
+      //$.get('callFriend', {id: id, friendNum:0})
 
       var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + id)
+      var friends = lovebombRef.child('friends').val();
+
+      for (var i=0; i<friends.length; i++) {
+        $.get('textFriend', {id: id, friendNum:i})  
+      }
+
+
       lovebombRef.child('friends').on('value', function(snapshot){
         onFriendsUpdate(snapshot, id)
       })
@@ -215,7 +223,7 @@
   })
 
   $('#submit').click(function(){
-    var friendList = [];
+    var friendList = new Array();
     for (i=1; i <= FRIEND_COUNTER; i++) {
       friendList.push({
         name: $("#friend" + i).val(),
@@ -242,7 +250,7 @@
     $('.starting').show()
 
     $.get('startBomb', {data: JSON.stringify(params)}, function(id){
-      $('#link a').text('Link To This Lovebomb').attr({'href':'/link?q='+id})
+      $('#link a').text('Invite People to Lovebomb').attr({'href':'/invite?id='+id})
       var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + id)
       lovebombRef.child('bomber').on('value', function(snapshot){
         onBomberUpdate(snapshot, id)

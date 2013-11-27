@@ -34,8 +34,24 @@ exports.startBomb = function(req, res){
 }
 
 function fetchLovebombById( id, callback ){
+  console.log("fetchLovebombById: " + id)
   dbRef.child(id).once('value', function(snapshot){
     callback(snapshot.val())
+  })
+}
+
+exports.invite = function(req, res) {
+  console.log("INVITE")
+  fetchLovebombById( req.query.id, function(data){
+    
+    console.log("GOT LOVEBOMB ID" + req.query.id)
+
+    if( data ){
+      data.id = req.query.id
+      res.render('invite', data )
+    } else {
+      res.send('Lovebomb not found')
+    }
   })
 }
 
@@ -52,14 +68,13 @@ exports.textFriend = function(req, res){
     var lovebombRef = dbRef.child( req.query.id )
     lovebombRef.child('friends/'+friendNum).child('text').set({
       status: "complete",
+      message: req.query.message,
       date: (new Date()).toUTCString()
     })
 
     res.send(data)
   })
-
 }
-
 
 exports.callFriend = function(req, res){
   fetchLovebombById( req.query.id, function(data){

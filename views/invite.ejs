@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lovebomb</title>
+        <link rel="stylesheet" href='/stylesheets/style.css'/>
+        <style>
+        input {
+            font-size: 24px;
+            padding: 10px;
+        }
+
+        </style>
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+        <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase-simple-login.js'></script>
+    </head>
+
+    <body>
+
+    <div class="container">
+
+        <h2>
+        We need your help to make a lovebomb for <span id="recipient"></span>!
+        </h2>
+
+        <h2>
+            <input type="tel" id="friendNumber" placeholder="What's your phone number?" value="" other="6508045596"/> 
+        </h2>
+
+        <div class="button" id="callme">Call Me Now</div>
+
+        <div class="starting" style="display:none;">
+          <h2>Calling you now...</h1>
+        </div>
+
+        <div class="telling" style="display:none;">
+          <h2>Sending the Lovebomb!</h2>
+        </div>
+
+        <div class="inviteOthers" style="display:none;">
+            Thanks! Invite someone else who loves them?
+
+            <div class="button" id="login">Invite Friends from Facebook</div>
+        </div>
+
+    </div>
+
+    <script>
+
+    var FIREBASE_BASE_URL = 'https://lovebomb.firebaseio.com/lovebombs',
+        id = "<%= id %>",
+        lbRef = new Firebase(FIREBASE_BASE_URL),
+        dbRef = lbRef.child(id)
+
+    dbRef.once('value', function(snapshot){ render(snapshot.val()) })
+
+    function render(lovebomb){
+        window.lb = lovebomb
+        console.log( lovebomb )
+        $('#recipient').text( lovebomb.recipient.name )
+        $('#bomber').text( lovebomb.bomber.name )
+        //var friendList = lovebomb.friends.map(function(f){return "and " + f.name})
+        //$('#friends').text( friendList )
+
+        $('<audio>')
+            .attr({controls:'controls'})
+            .append( $('<source>').attr({src:lovebomb.bomber.call.recordingUrl}))
+            .appendTo('.telling')
+    }
+
+    function onFriendsUpdate() {
+        // Check to see if friend with this phone number was recorded,
+        // If so, say thanks and ask to invite others
+
+        console.log("ONFRIENDSUPDATE - AFTER INVITE CALL?")
+
+        var friendNumber = $('#friendNumber').val()
+        friendMatchingNumber(friendNumber, function (number, friendRef) {
+
+            $('.starting').show()
+            $('.inviteOthers').show()
+        })        
+    }
+
+    function friendMatchingNumber(number, callback) {
+
+
+        friendsRef.forEach(function (child) {
+            var friendData = friend.val();
+
+            // Callback w/ matching child
+            if (friendData.number == friendNumber) {
+                callback(number, child);
+            }
+        })
+    }
+
+
+
+    var auth = new FirebaseSimpleLogin( lbRef, function(error, user) {
+        if( error ) {console.log("ERROR LOGIN", error)}
+        else if(user){
+          console.log( "USER ID:", user.id, "Provider:", user.provider, user)
+          window.user = user //TODO: Better way to do this?
+          onLoggedIn(user)
+        }
+        else{
+          console.log("logged out")
+          window.user = null
+          onLoggedOut(user)
+        }
+    })
+
+    function onLoggedIn(user){
+        console.log("logged in!");
+        // find mutual friends and show them now
+    }
+
+    function onLoggedOut(user){ 
+        console.log("logged out!")
+    }
+
+    $('#login').click(function(){
+        auth.login('facebook')
+    })
+
+
+    $('#callme').click(function(){
+
+        // 1. Check to make sure we haven't called the number before
+        // 2. If not called, call friend and record message
+        // 3. Post-record, say thanks and ask if they should invite someone else
+        // 4. Show Fb mutual friends they might want to invite 
+        // 5. If called already, alert
+
+        var newFriendNumber = $('#friendNumber').val()
+        console.log("CLICKEDCALL " + newFriendNumber)
+
+        // Get current friends snapshot
+        dbRef.child('friends').once('value', function(friendsSnapshot){ 
+
+            var alreadyInvited = friendsSnapshot.forEach(function (friend) {
+                var friendData.friend.val()
+                // if we've already called this number before
+                if (friendData.number == newFriendNumber &&
+                    friendData.call != "completed") {
+                    return true;
+                }
+            })
+
+            if (!alreadyInvited) 
+            {
+                $('.starting').show()
+
+                var newFriend = {
+                    name: "",
+                    fbId: "",
+                    invitedBy: "",
+                    number: newFriendNumber
+                }
+                
+                // Push one more friend onto the list 
+                // Note: Firebase let's you add to an array by just indexing a "number"
+                var newFriendIndex = friendsSnapshot.numChildren()
+                console.log(newFriendIndex)
+
+                friendsSnapshot.child(newFriendIndex.toString()).ref().set(newFriend);
+
+
+                $.get('callFriend', {id: id, friendNum:newFriendIndex}, function(id) {
+                    friendsSnapshot.ref().on('value', function(snapshot) {
+                        onFriendsUpdate(snapshot, id)
+                    })
+                })
+
+            }
+            else {
+                alert("We already invited " + newFriendNumber + ", please enter another one.");
+            }
+        })
+    })
+
+    </script>
+
+    </body>
+
+
+</html>
