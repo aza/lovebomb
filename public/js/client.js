@@ -181,6 +181,7 @@
         .append( $('<source>').attr({src:data.call.recordingUrl}))
         .appendTo('.telling')
 
+      $.get('sendBombToRecipient', {id: id})
 
       // We used to call friends here, but now we'll try texting instead
       //$.get('callFriend', {id: id, friendNum:0})
