@@ -166,7 +166,8 @@
 
   function onBomberUpdate( snapshot, id ){
     var data = snapshot.val()
-    console.log('here', data)
+    console.log('onBomberUpdate ')
+    console.log(data)
 
     // TODO: Only do this the first time...
     if( data.call && data.call.status == "completed" ){

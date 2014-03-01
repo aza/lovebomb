@@ -7,6 +7,18 @@ Call prompt ideas:
 "What should P know about him/herself that ?"
 
 
+PRIORITIES:
+
+- Fix recordFriend so it actually works
+- Unique invite links from review links (for instigator) from final-link (for recipient)
+- Short IDs 
+- Sending text messages to instigator for every "signed" contribution from invitee
+- Removing FB / typeahead / complex flows -- going to Philip's simple flow
+- Copy / paste link after call is recorded
+
+
+
+
 Feature Categories:
 DISTRIBUTION
 LOVE_QUALITY

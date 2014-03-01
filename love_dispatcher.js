@@ -40,7 +40,7 @@ exports.text = function(number, actionUrl, params){
 }
 
 exports.call = function(number, actionUrl, urlParams){
-  console.log( "MAKING CALL")
+  console.log( "DISPATCHER MAKING CALL")
   urlParams = urlParams || {}
   serializedParams = Object.keys(urlParams).map(function(p){return p + '=' + encodeURIComponent(urlParams[p])}).join('&')
   if( serializedParams.length > 0 ) serializedParams = "?" + serializedParams
@@ -53,7 +53,7 @@ exports.call = function(number, actionUrl, urlParams){
   }, function(err, responseData) {
 
       //executed when the call has been initiated.
-      console.log("ERROR", err ); // outputs "+14506667788"
+      console.log("DISPATCHER ERROR", err ); // outputs "+14506667788"
       //console.log( responseData.subresource_uris )
 
   });

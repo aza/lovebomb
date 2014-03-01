@@ -16,13 +16,16 @@ exports.startBomb = function(req, res){
   /* Perform call */
   // TODO: Add proper error handling for query
   // TODO: Put the call into the Firebase in /calls
-  console.log( req.query, req.query.data )
+  console.log( "START BOMB BIGTIME ")
+  console.log(req.query, req.query.data )
 
   var data = JSON.parse( req.query.data )
   console.log( data )
 
   var item = dbRef.push( data )
   var id = item.name()
+
+  console.log( "START BOMB id: " + id)
 
   dispatcher.call(
     data.bomber.number,
