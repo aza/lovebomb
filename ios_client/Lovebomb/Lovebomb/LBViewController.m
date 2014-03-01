@@ -7,17 +7,46 @@
 //
 
 #import "LBViewController.h"
+#import <CoreTelephony/CoreTelephonyDefines.h>
+
+extern NSString* CTSettingCopyMyPhoneNumber();
 
 @interface LBViewController ()
+
+@property (strong, nonatomic) IBOutlet UITextView *selectedFriendsView;
+@property (retain, nonatomic) FBFriendPickerViewController *friendPickerController;
 
 @end
 
 @implementation LBViewController
 
+@synthesize selectedFriendsView = _friendResultText;
+@synthesize friendPickerController = _friendPickerController;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    NSString *phone = CTSettingCopyMyPhoneNumber();
+    NSLog(@"current phone number: %@", phone);
+    
+    NSString *firstname;
+    NSString *lastname;
+    NSString *ownerName = [[UIDevice currentDevice] name];
+    
+    NSRange t = [ownerName rangeOfString:@"'s"];
+    if (t.location != NSNotFound) {
+        ownerName = [ownerName substringToIndex:t.location];
+    }
+    
+    NSArray *matches = [ABContactsHelper contactsMatchingName:ownerName];
+    if(matches.count == 1){
+        for (ABContact *contact in matches){
+            firstname = [contact firstname];
+            lastname = [contact lastname];
+        }
+    }
 }
 
 
@@ -70,11 +99,15 @@
         [text appendString:user.name];
     }
     
-    [self fillTextBoxAndDismiss:text.length > 0 ? text : @"<None>"];
+    NSLog(@"text: %@", text);
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)facebookViewControllerCancelWasPressed:(id)sender {
-    [self fillTextBoxAndDismiss:@"<Cancelled>"];
+    NSLog(@"None");
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

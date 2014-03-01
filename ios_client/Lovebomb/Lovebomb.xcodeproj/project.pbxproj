@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		52C73C79182B70A40077D75D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C73C78182B70A40077D75D /* FacebookSDK.framework */; };
 		52C73C7A182B70A40077D75D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52C73C78182B70A40077D75D /* FacebookSDK.framework */; };
+		52E5BDA01859A06900C073A0 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E5BD9F1859A06900C073A0 /* CoreTelephony.framework */; };
 		52E93F971826101D002B63E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E93F961826101D002B63E1 /* Foundation.framework */; };
 		52E93F991826101D002B63E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E93F981826101D002B63E1 /* CoreGraphics.framework */; };
 		52E93F9B1826101D002B63E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E93F9A1826101D002B63E1 /* UIKit.framework */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		52C73C78182B70A40077D75D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		52E5BD9F1859A06900C073A0 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		52E93F931826101D002B63E1 /* Lovebomb.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lovebomb.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52E93F961826101D002B63E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		52E93F981826101D002B63E1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -65,6 +67,7 @@
 			files = (
 				52E93F991826101D002B63E1 /* CoreGraphics.framework in Frameworks */,
 				52C73C79182B70A40077D75D /* FacebookSDK.framework in Frameworks */,
+				52E5BDA01859A06900C073A0 /* CoreTelephony.framework in Frameworks */,
 				52E93F9B1826101D002B63E1 /* UIKit.framework in Frameworks */,
 				52E93F971826101D002B63E1 /* Foundation.framework in Frameworks */,
 			);
@@ -109,6 +112,7 @@
 				52C73C78182B70A40077D75D /* FacebookSDK.framework */,
 				52E93F961826101D002B63E1 /* Foundation.framework */,
 				52E93F981826101D002B63E1 /* CoreGraphics.framework */,
+				52E5BD9F1859A06900C073A0 /* CoreTelephony.framework */,
 				52E93F9A1826101D002B63E1 /* UIKit.framework */,
 				52E93FB51826101E002B63E1 /* XCTest.framework */,
 			);
@@ -392,7 +396,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lovebomb/Lovebomb-Prefix.pch";
 				INFOPLIST_FILE = "Lovebomb/Lovebomb-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -410,7 +414,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Lovebomb/Lovebomb-Prefix.pch";
 				INFOPLIST_FILE = "Lovebomb/Lovebomb-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
