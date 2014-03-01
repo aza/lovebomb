@@ -251,6 +251,9 @@
     $('.starting').show()
 
     $.get('startBomb', {data: JSON.stringify(params)}, function(id){
+      console.log("STARTBOMB RETURNED")
+      console.log("id: " + id)
+
       $('#link a').text('Invite People to Lovebomb').attr({'href':'/invite?id='+id})
       var lovebombRef = new Firebase(FIREBASE_BASE_URL + 'lovebombs/' + id)
       lovebombRef.child('bomber').on('value', function(snapshot){
